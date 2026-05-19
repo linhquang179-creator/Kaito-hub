@@ -1,5 +1,5 @@
 # Kaito-hub
-https://raw.githubusercontent.com/onepicesenpai/onepicesenpai/main/Kaitoonichan"))()
+https://raw.githubusercontent.com/onepicesenpai/onepicesenpai/main/onichanokaka
 getgenv().MasterHupConfig = {
     KeySystem = false,
     SaveSettings = true,
@@ -9,7 +9,7 @@ getgenv().MasterHupConfig = {
 getgenv().MasterHup = {NoKey=true, AntiCrash=true, Version="4.2"}
 
 -- Tải giao diện gốc
-local lib=loadstring(game:HttpGet("https://raw.githubusercontent.com/onepicesenpai/onepicesenpai/main/Kaitoonichan"))()
+local lib=loadstring(game:HttpGet("https://raw.githubusercontent.com/onepicesenpai/onepicesenpai/main/onichanokaka"))()
 local w=lib.CreateLib("MASTER HUP 2024 | FULL V4 + EVENT", "DarkTheme")
 
 -- 🏠 TRANG CHÍNH
