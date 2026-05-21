@@ -1,0 +1,53 @@
+getgenv().Config = {
+    AntiAfk = false, BringRange = 45, ClickSpeed = 7,
+    Mastery = false, FruitESP = false, GrabFruit = false
+}
+
+-- Sửa đúng tên hàm thư viện
+local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com.com/78n/Scripts/main/UI/AstraLib.lua"))()
+local w = lib.CreateLib("🔥 KAITO HUB FULL | BLOX FRUITS", "DarkTheme")
+
+-- Thêm đầy đủ các tab chức năng
+local Home = w:NewTab("🏠 Trang Chính")
+Home:NewToggle("Chống AFK", false, function(v) Config.AntiAfk = v end)
+
+local Farm = w:NewTab("🚜 Auto Farm")
+Farm:NewToggle("Gom Quái", false, function(v) Config.Bring = v end)
+Farm:NewToggle("Tự Đánh", false, function(v) Config.Attack = v end)
+Farm:NewToggle("Tự Tăng Thông Thạo", false, function(v) Config.Mastery = v end)
+
+local Fruit = w:NewTab("🍎 Trái Cây")
+Fruit:NewToggle("ESP Tìm Trái", false, function(v) Config.FruitESP = v end)
+Fruit:NewToggle("Tự Nhặt Trái", false, function(v) Config.GrabFruit = v end)
+
+-- Code chạy hoàn chỉnh
+spawn(function()
+    while task.wait(0.2) do
+        pcall(function()
+            local plr = game.Players.LocalPlayer
+            local char = plr.Character or plr.CharacterAdded:Wait()
+            local hrp = char:FindFirstChild("HumanoidRootPart")
+            if not hrp then return end
+
+            if Config.AntiAfk then
+                game:GetService("VirtualUser"):Button2Down(Vector2.zero, workspace.CurrentCamera.CFrame)
+            end
+
+            if Config.Bring then
+                for _, mob in pairs(workspace:GetDescendants()) do
+                    if mob.Name == "HumanoidRootPart" and mob.Parent:FindFirstChild("Humanoid") and mob.Parent.Humanoid.Health > 0 and (mob.Position - hrp.Position).Magnitude < Config.BringRange then
+                        mob.CFrame = hrp.CFrame + Vector3.new(0, 3, 0)
+                    end
+                end
+            end
+
+            if Config.Attack then
+                task.wait(1 / Config.ClickSpeed)
+                local remotes = game:GetService("ReplicatedStorage"):FindFirstChild("Remotes")
+                if remotes and remotes:FindFirstChild("Click") then
+                    remotes.Click:FireServer()
+                end
+            end
+        end)
+    end
+end)
