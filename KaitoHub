@@ -1,0 +1,138 @@
+         local Window = MakeWindow({
+         Hub = {
+         Title = "KaitoHub",
+        },
+        Key = {
+        KeySystem = false,
+        Title = "Key System",
+        Description = "",
+        KeyLink = "",
+        Keys = {"1234"},
+        Notifi = {
+        Notifications = true,
+        CorrectKey = "Running the Script...",
+       Incorrectkey = "The key is incorrect",
+       CopyKeyLink = "Copied to Clipboard"
+      }
+    }
+  })
+
+       MinimizeButton({
+       Image = "http://www.roblox.com/asset/?id=1000032050",
+       Size = {60, 60},
+       Color = Color3.fromRGB(10, 10, 10),
+       Corner = true,
+       Stroke = false,
+       StrokeColor = Color3.fromRGB(255, 0, 0)
+      })
+      
+------ Tab
+     local Tab1o = MakeTab({Name = "Script Farm"})
+     
+------- BUTTON
+    
+    AddButton(Tab1o, {
+     Name = "KaitoHub",
+    Callback = function()
+	  local Settings = {
+  JoinTeam = "Pirates"; -- Pirates/Marines
+  Translator = true; -- true/false
+}
+
+https://raw.githubusercontent.com/linhquang179-creator/Kaito-hub/refs/heads/main/Kaitono8Kaka.txt
+(Settings)
+  end
+local Window = MakeWindow({
+         Hub = {
+         Title = "KaitoHub",
+        },
+loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua", true))()
+local Hub = Window.CreateLib("MASTER HUB BETA", "DarkTheme")
+
+-- TAB CHÍNH
+local Main = Hub:NewTab("🏠 Main")
+Main:NewToggle("✅ Chống AFK", false, function(v) getgenv().AntiAfk = v end)
+Main:NewToggle("🔁 Đổi Server Tự Động", false, function(v) getgenv().AutoRejoin = v end)
+
+-- TAB FARM (ĐÃ THÊM CLICK 0 GIÂY)
+local Stats = Hub:NewTab("📊 Stats")
+Stats:NewToggle("🚜 Bật Auto Farm", false, function(v) getgenv().AutoFarm = v end)
+Stats:NewSlider("🧲 Tầm Gom Quái (mét)", 10, 150, 45, function(v) getgenv().MobRange = v end)
+Stats:NewToggle("✅ Gom Quái", false, function(v) getgenv().BringMobs = v end)
+Stats:NewToggle("⚡ Bật Auto Click", false, function(v) getgenv().AutoClick = v end)
+Stats:NewSlider("⏱️ Tốc Độ Click (0.01 = NHANH NHẤT)", 0.01, 2, 0.01, function(v) getgenv().ClickDelay = v end)
+Stats:NewToggle("📈 Auto Tăng Thông Thạo", false, function(v) getgenv().AutoMastery = v end)
+
+-- TAB PLAYER
+local Player = Hub:NewTab("👤 Player")
+Player:NewToggle("💨 Tăng Tốc Chạy", false, function(v) getgenv().Speed = v end)
+Player:NewToggle("🕊️ Bay", false, function(v) getgenv().Fly = v end)
+Player:NewToggle("❤️ Hồi Máu Tự Động", false, function(v) getgenv().AutoHeal = v end)
+
+-- TAB ĐẢO
+local Island = Hub:NewTab("🗺️ Island")
+Island:NewButton("📍 Đảo 1", function() pcall(function() game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1389, 126, 3863) end) end)
+Island:NewButton("📍 Đảo 2", function() pcall(function() game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-3142, 160, 2551) end) end)
+Island:NewToggle("🔍 Tìm Đảo Ảo", false, function(v) getgenv().FindMirage = v end)
+
+-- TAB TRÁI + RAID
+local Fruit = Hub:NewTab("🍇 Fruit + Raid")
+Fruit:NewToggle("👁️ ESP Trái Cây", false, function(v) getgenv().FruitESP = v end)
+Fruit:NewToggle("🤲 Tự Lấy Trái", false, function(v) getgenv().GrabFruit = v end)
+Fruit:NewToggle("💥 Auto Raid", false, function(v) getgenv().AutoRaid = v end)
+
+-- TAB SỰ KIỆN + V4
+local Event = Hub:NewTab("🌊 Sea Event")
+Event:NewToggle("✨ Tự Nâng Tộc V4", false, function(v) getgenv().FullV4 = v end)
+Event:NewToggle("🦈 Tự Giết Biển Thú", false, function(v) getgenv().SeaBeast = v end)
+Event:NewToggle("🎁 Tự Nhặt Quà Sự Kiện", false, function(v) getgenv().GiftEvent = v end)
+
+-- ✅ CHẠY TOÀN BỘ CHỨC NĂNG
+spawn(function()
+    while task.wait(0.03) do
+        pcall(function()
+            local plr = game.Players.LocalPlayer
+            if not plr or not plr.Character then return end
+            local root = plr.Character:FindFirstChild("HumanoidRootPart")
+            local hum = plr.Character:FindFirstChild("Humanoid")
+            if not root or not hum then return end
+
+            -- Chống AFK
+            if getgenv().AntiAfk then
+                game:GetService("VirtualUser"):Button2Down(Vector2.new(0,0), workspace.CurrentCamera.CFrame)
+            end
+
+            -- Tăng tốc + Bay
+            hum.WalkSpeed = getgenv().Speed and 300 or 16
+            hum.PlatformStand = getgenv().Fly or false
+            if getgenv().Fly then root.Velocity = Vector3.new(0,50,0) end
+
+            -- Hồi máu tự động
+            if getgenv().AutoHeal and hum.Health < hum.MaxHealth then
+                hum.Health = hum.MaxHealth
+            end
+
+            -- Gom quái
+            if getgenv().BringMobs and getgenv().MobRange then
+                for _, mob in pairs(workspace:GetDescendants()) do
+                    if mob.Name == "HumanoidRootPart" and mob.Parent:FindFirstChild("Humanoid") 
+                    and mob.Parent.Humanoid.Health > 0 
+                    and (mob.Position - root.Position).Magnitude < getgenv().MobRange then
+                        mob.CFrame = CFrame.new(root.Position.X, root.Position.Y + 3, root.Position.Z)
+                    end
+                end
+            end
+
+            -- ⚡ Click NHANH NHẤT / Gần 0 giây
+            if getgenv().AutoClick and getgenv().ClickDelay then
+                task.wait(getgenv().ClickDelay)
+                local remotes = game:GetService("ReplicatedStorage"):FindFirstChild("Remotes")
+                if remotes and remotes:FindFirstChild("Click") then
+                    remotes.Click:FireServer(nil, getgenv().AutoMastery and "Mastery" or nil)
+                end
+            end
+        end)
+    end
+end)
+
+  })
