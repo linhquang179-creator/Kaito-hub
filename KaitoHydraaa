@@ -1,0 +1,18 @@
+getgenv().Config = {AntiAfk=false,BringRange=45,ClickSpeed=7}
+local lib=loadstring(game:HttpGet("https://raw.githubusercontent.com/78n/Scripts/main/UI/AstraLib.lua"))()
+local w=lib:Create("🔥 KAITO HUB | BLOX FRUITS","Dark")
+local Tab1=w:Tab("🏠 Chính")
+Tab1:Toggle("Chống AFK",false,function(v)Config.AntiAfk=v end)
+Tab1:Slider("Tầm xa gom quái",10,100,45,function(v)Config.BringRange=v end)
+local Tab2=w:Tab("🚜 Auto Farm")
+Tab2:Toggle("Bật Gom Quái",false,function(v)Config.Bring=v end)
+Tab2:Toggle("Bật Tự Đánh",false,function(v)Config.Attack=v end)
+spawn(function()while task.wait(0.2)do pcall(function()
+local c=game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
+local h=c:FindFirstChild("HumanoidRootPart")if not h then return end
+if Config.AntiAfk then game.VirtualUser:Button2Down(Vector2.zero,workspace.Camera.CFrame)end
+if Config.Bring then for _,e in pairs(workspace:FindFirstChild("Enemies",true):GetChildren())do
+if e:FindFirstChild("Humanoid")and e.Humanoid.Health>0 and (e.HumanoidRootPart.Position-h.Position).Magnitude<Config.BringRange then
+e.HumanoidRootPart.CFrame=h.CFrame+Vector3.new(0,3,0)end end end
+if Config.Attack then task.wait(1/Config.ClickSpeed)game.ReplicatedStorage.Remotes.Click:FireServer()end
+end)end end)
